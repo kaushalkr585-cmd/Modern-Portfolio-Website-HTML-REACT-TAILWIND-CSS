@@ -106,12 +106,6 @@ const Footer = () => {
           ))}
         </div>
 
-        {/* --- Personal Quote / Tagline --- */}
-        {/* Replace this with your favorite quote or brand message */}
-        <p className="text-gray-300 italic max-w-xl">
-          “Success is when preparation meets opportunity.”
-        </p>
-
         {/* --- Copyright / Trademark --- */}
         {/* Auto-updates year dynamically */}
         <p className="text-xs text-gray-400">
