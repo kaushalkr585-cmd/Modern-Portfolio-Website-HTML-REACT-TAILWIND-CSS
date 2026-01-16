@@ -188,8 +188,8 @@ export default function Contact() {
                 <option value="Web Development" className="text-black">
                   Web Development
                 </option>
-                <option value="Mobile Application" className="text-black">
-                  Mobile Application
+                <option value="Logo Animation" className="text-black">
+                  Logo Animation
                 </option>
                 <option value="Others" className="text-black">
                   Others
