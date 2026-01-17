@@ -126,7 +126,7 @@ export default function MusicVideoEdit() {
                 )}
               </AnimatePresence>
 
-              {/* ✅ 1080x1080 Wrapper (Square on both Mobile + Desktop) */}
+              {/*  1080x1080 Wrapper (Square on both Mobile + Desktop) */}
               <div className="w-full flex justify-center mt-6">
                 <div
                   className="relative overflow-hidden rounded-2xl shadow-2xl bg-black/30"

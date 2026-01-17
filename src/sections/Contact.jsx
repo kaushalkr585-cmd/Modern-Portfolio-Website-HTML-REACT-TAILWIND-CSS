@@ -191,6 +191,9 @@ export default function Contact() {
                 <option value="Logo Animation" className="text-black">
                   Logo Animation
                 </option>
+                 <option value="Logo Animation" className="text-black">
+                  Music Edit
+                </option>
                 <option value="Others" className="text-black">
                   Others
                 </option>
