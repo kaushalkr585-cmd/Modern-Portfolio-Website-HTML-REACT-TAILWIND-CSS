@@ -42,9 +42,9 @@ export default function MusicVideoEdit() {
         video: "/Vecna.mp4",
       },
       {
-        title: "Will Edit",
+        title: "Steve Edit",
         bgColor: "#0A1220", // bluish dark
-        video: "/Will_Buyers.mp4",
+        video: "/Steve.mp4",
       },
     ],
     []
