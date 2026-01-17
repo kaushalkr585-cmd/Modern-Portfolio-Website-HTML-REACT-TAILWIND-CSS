@@ -6,6 +6,8 @@ import Home from "./sections/Home";
 import About from "./sections/About";
 import Skills from "./sections/Skills";
 import Projects from "./sections/Projects";
+import Logo from "./sections/Logo";
+import Videos from "./sections/Videos";
 import Experience from "./sections/Experience";
 // import Testimonials from "./sections/Testimonials";
 import Contact from "./sections/Contact";
@@ -30,6 +32,8 @@ export default function App() {
       <About />
       <Skills />
       <Projects />
+      <Logo />
+      <Videos />
       <Experience />
       {/* <Testimonials /> */}
       <Contact />

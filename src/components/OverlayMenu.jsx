@@ -2,9 +2,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FiX } from "react-icons/fi";
 
 export default function OverlayMenu({ isOpen, onClose }) {
-  // Pick clip origin based on screen width
-  const isMobile = typeof window !== "undefined" && window.innerWidth < 1024; // lg breakpoint
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 1024;
   const origin = isMobile ? "95% 8%" : "50% 8%";
+
+  const slugify = (text) => text.toLowerCase().replace(/\s+/g, "-");
 
   return (
     <AnimatePresence>
@@ -32,7 +33,9 @@ export default function OverlayMenu({ isOpen, onClose }) {
               "Home",
               "About",
               "Skills",
-              "Projects",
+              "Web Development Projects",
+              "Logo Animation Projects",
+              "Music Video Edit",
               "Experience",
               "Testimonials",
               "Contact",
@@ -41,10 +44,10 @@ export default function OverlayMenu({ isOpen, onClose }) {
                 key={item}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 + index * 0.1 }}
+                transition={{ delay: 0.25 + index * 0.08 }}
               >
                 <a
-                  href={`#${item.toLowerCase()}`}
+                  href={`#${slugify(item)}`}
                   onClick={onClose}
                   className="text-4xl text-white font-semibold hover:text-pink-400 transition-colors duration-300"
                 >

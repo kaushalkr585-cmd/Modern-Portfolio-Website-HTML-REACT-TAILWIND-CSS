@@ -92,7 +92,7 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* Contact Button */}
+        {/* Contact Button (OLD STYLE - only Desktop) */}
         <div className="hidden lg:block">
           <a
             href="#contact"
