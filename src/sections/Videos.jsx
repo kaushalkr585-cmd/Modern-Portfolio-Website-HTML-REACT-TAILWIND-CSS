@@ -28,11 +28,11 @@ const useIsMobile = (query = "(max-width: 639px)") => {
 export default function MusicVideoEdit() {
   const isMobile = useIsMobile();
 
-  // ✅ Background colors selected by me (premium dark tones)
+  //  Background colors selected by me (premium dark tones)
   const edits = React.useMemo(
     () => [
       {
-        title: "Sadie Edit",
+        title: "Sadie Sink Edit",
         bgColor: "#070A0F", // deep midnight
         video: "/Sadie.mp4",
       },
@@ -44,7 +44,7 @@ export default function MusicVideoEdit() {
       {
         title: "Will Edit",
         bgColor: "#0A1220", // bluish dark
-        video: "/Will.mp4",
+        video: "/Will_Buyers.mp4",
       },
     ],
     []
