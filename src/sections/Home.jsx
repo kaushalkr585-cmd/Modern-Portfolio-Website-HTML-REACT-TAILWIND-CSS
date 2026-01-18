@@ -33,7 +33,7 @@ const glowVariants = {
 
 const Home = React.forwardRef((props, ref) => {
   const roles = useMemo(
-    () => ["Software Developer", "Web Developer", "Motion Graphics Designer"],
+    () => ["Software Developer", "Web Developer", "Motion Graphics Designer", "Video Editor"],
     []
   );
   const [index, setIndex] = useState(0);

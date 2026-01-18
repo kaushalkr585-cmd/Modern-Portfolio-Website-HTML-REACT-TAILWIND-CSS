@@ -32,14 +32,19 @@ export default function MusicVideoEdit() {
   const edits = React.useMemo(
     () => [
       {
-        title: "Sadie Sink Edit",
-        bgColor: "#070A0F", // deep midnight
+        title: "Video 1",
+        bgColor: "#070A0F", 
         video: "/Sadie.mp4",
       },
       {
-        title: "Vecna Edit",
-        bgColor: "#0B0B0B", // pure dark
+        title: "Video 2",
+        bgColor: "#0B0B0B", 
         video: "/Vecna.mp4",
+      },
+      {
+        title: "Video 3",
+        bgColor: "#1A0A0A", 
+        video: "/Steve.mp4",
       },
     ],
     []

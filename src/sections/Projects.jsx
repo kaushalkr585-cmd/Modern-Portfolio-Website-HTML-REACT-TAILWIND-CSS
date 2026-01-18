@@ -45,7 +45,7 @@ export default function Projects() {
       },
       {
         title: "Chatbot",
-        link: "https://chatbot-html-css-react-blqac132i-kaushals-projects-fa2a81e6.vercel.app/",
+        link: "https://chatbot-html-css-react-js.vercel.app/",
         bgColor: "#3884d3",
         image: isMobile ? photo2 : img2,
       },

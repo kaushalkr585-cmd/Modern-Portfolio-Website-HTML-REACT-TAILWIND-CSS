@@ -17,7 +17,6 @@ export default function About() {
 
       {/* Content container */}
       <div className="relative z-10 max-w-6xl w-full mx-auto px-6 md:px-10 lg:px-12 py-20 flex flex-col gap-12">
-        
         {/* Profile header */}
         <motion.div
           className="flex flex-col md:flex-row items-center md:items-stretch gap-8"
@@ -34,9 +33,9 @@ export default function About() {
             aria-hidden="true"
           >
             {/* Replace with your actual avatar image */}
-            
+
             <div className="absolute inset-0 " />
-           
+
             <img src={p} alt="test" />
           </motion.div>
 
@@ -50,7 +49,13 @@ export default function About() {
             </p>
 
             <p className="mt-4 text-gray-300 leading-relaxed text-base sm:text-lg max-w-2xl md:max-w-3xl">
-              I build modern, scalable web applications with a strong focus on clean code, user-friendly UI, and performance. My toolkit includes HTML, CSS, JavaScript, React, Node.js, MongoDB, and MySQL, helping me bring ideas to life from concept to deployment with reliable backend logic and smooth interfaces.
+              I build modern, scalable web applications with a strong focus on
+              clean code, user-friendly UI, and performance. My toolkit includes
+              HTML, CSS, JavaScript, React, Node.js, MongoDB, and MySQL, helping
+              me bring ideas to life from concept to deployment with reliable
+              backend logic and smooth interfaces. Along with development, I
+              also create motion graphics and edit professional videos using
+              Adobe After Effects and Premiere Pro.
             </p>
 
             {/* Quick stats */}
@@ -79,12 +84,12 @@ export default function About() {
             {/* CTAs */}
             <div className="mt-6 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center md:justify-start">
               <a
-                href="#projects"
+                href="#web-development-projects"
                 className="inline-flex items-center justify-center rounded-lg bg-white text-black font-semibold px-5 py-3 hover:bg-gray-200 transition"
-                aria-label="View my projects"
               >
                 View Projects
               </a>
+
               <a
                 href="#contact"
                 className="inline-flex items-center justify-center rounded-lg border border-white/20 bg-white/10 text-white px-5 py-3 hover:bg-white/20 transition"
@@ -109,10 +114,16 @@ export default function About() {
               About Me
             </h3>
             <p className="text-gray-300 leading-relaxed text-base sm:text-lg">
-             I’m a Software Developer and Web Developer — passionate about building fast, reliable web applications with clean code, smooth user experiences, and strong performance.
+              I’m a Software Developer and Web Developer — passionate about
+              building fast, reliable web applications with clean code, smooth
+              user experiences, and strong performance. Along with development,
+              I’m also a Motion Graphics Designer and Video Editor, creating
+              engaging visuals using Adobe After Effects and Premiere Pro.
             </p>
+
             <p className="mt-4 text-gray-400 text-base sm:text-lg">
-              I love turning ideas into scalable, user‑friendly products that make an impact. 
+              I love turning ideas into scalable, user‑friendly products that
+              make an impact.
             </p>
           </motion.div>
         </div>
@@ -120,4 +131,3 @@ export default function About() {
     </section>
   );
 }
-
