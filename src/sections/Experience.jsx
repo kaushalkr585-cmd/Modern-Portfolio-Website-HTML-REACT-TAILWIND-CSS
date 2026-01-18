@@ -13,13 +13,12 @@ const experiences = [
     description:
       "Learned web development independently and built responsive, modern UI projects using React, Tailwind CSS, and Framer Motion with a focus on clean design and performance.",
   },
-
   {
-    role: "Python Intern",
-    company: "Internship",
-    duration: "2023",
+    role: "Database & SQL",
+    company: "Learning + Practice",
+    duration: "2025 (Till June)",
     description:
-      "Completed a Python internship where I worked on core programming concepts, problem-solving, and small automation/project tasks, improving my coding fundamentals.",
+      "Strengthened database fundamentals including SQL queries, normalization, and relational database concepts, with hands-on practice on real-world style datasets.",
   },
 
   {
@@ -29,14 +28,15 @@ const experiences = [
     description:
       "Explored CV/ML concepts and implemented beginner-to-intermediate projects to understand model workflows, data handling, and practical applications of machine learning.",
   },
-
   {
-    role: "Database & SQL",
-    company: "Learning + Practice",
-    duration: "2025 (Till June)",
+    role: "Python Intern",
+    company: "Internship",
+    duration: "2023",
     description:
-      "Strengthened database fundamentals including SQL queries, normalization, and relational database concepts, with hands-on practice on real-world style datasets.",
+      "Completed a Python internship where I worked on core programming concepts, problem-solving, and small automation/project tasks, improving my coding fundamentals.",
   },
+
+  
 ];
 
 
