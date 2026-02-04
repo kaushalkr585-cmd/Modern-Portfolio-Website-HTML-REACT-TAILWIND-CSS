@@ -62,7 +62,7 @@ export default function Projects() {
         link: "https://thumblify-nu.vercel.app/",
         bgColor: "#cf0053",
         image: isMobile ? photo3 : img4,
-      },
+      }
 
     ],
     [isMobile]
