@@ -5,6 +5,7 @@ import { motion, useScroll, AnimatePresence } from "framer-motion";
 import img1 from "../assets/img1.png";
 import img2 from "../assets/img2.png";
 import img3 from "../assets/img3.png";
+import img4 from "../assets/img4.png";
 import photo1 from "../assets/photo1.png";
 import photo2 from "../assets/photo2.PNG";
 import photo3 from "../assets/photo3.png";
@@ -55,6 +56,14 @@ export default function Projects() {
         bgColor: "#dc9317",
         image: isMobile ? photo3 : img3,
       },
+
+      {
+        title: "Thumblify",
+        link: "https://thumblify-nu.vercel.app/",
+        bgColor: "#cf0053",
+        image: isMobile ? photo3 : img4,
+      },
+
     ],
     [isMobile]
   );
