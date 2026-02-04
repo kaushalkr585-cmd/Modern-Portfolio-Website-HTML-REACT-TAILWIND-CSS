@@ -9,6 +9,7 @@ import img4 from "../assets/img4.png";
 import photo1 from "../assets/photo1.png";
 import photo2 from "../assets/photo2.PNG";
 import photo3 from "../assets/photo3.png";
+import photo4 from "../assets/photo4.png";
 
 const MH3 = motion.h3;
 
@@ -56,12 +57,11 @@ export default function Projects() {
         bgColor: "#dc9317",
         image: isMobile ? photo3 : img3,
       },
-
       {
         title: "Thumblify",
         link: "https://thumblify-nu.vercel.app/",
         bgColor: "#cf0053",
-        image: isMobile ? photo3 : img4,
+        image: isMobile ? photo4 : img4,
       }
 
     ],
