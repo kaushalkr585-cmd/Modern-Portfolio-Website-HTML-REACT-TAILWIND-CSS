@@ -2,11 +2,9 @@ import React from "react";
 import { motion, useScroll, AnimatePresence } from "framer-motion";
 
 // Importing project images (desktop & mobile versions)
-import img1 from "../assets/img1.png";
 import img2 from "../assets/img2.png";
 import img3 from "../assets/img3.png";
 import img4 from "../assets/img4.png";
-import photo1 from "../assets/photo1.png";
 import photo2 from "../assets/photo2.PNG";
 import photo3 from "../assets/photo3.png";
 import photo4 from "../assets/photo4.png";
@@ -40,29 +38,24 @@ export default function Projects() {
   const projects = React.useMemo(
     () => [
       {
-        title: "Portfolio Website",
-        link: "https://portfolio-tailwind-css-react-framer-five.vercel.app/",
-        bgColor: "#0d4d3d",
-        image: isMobile ? photo1 : img1,
+        title: "Thumblify",
+        link: "https://thumblify-lake-xi.vercel.app/",
+        bgColor: "#cf0053",
+        image: isMobile ? photo4 : img4,
       },
       {
         title: "Chatbot",
-        link: "https://chatbot-html-css-react-js.vercel.app/",
-        bgColor: "#3884d3",
+        link: "https://chatbot-tawny-five-68.vercel.app/",
+        bgColor: "#221934",
         image: isMobile ? photo2 : img2,
       },
       {
         title: "Clothsy",
         link: "https://ecommerce-website-html-css-js-react.vercel.app/",
-        bgColor: "#dc9317",
+        bgColor: "#000000",
         image: isMobile ? photo3 : img3,
       },
-      {
-        title: "Thumblify",
-        link: "https://thumblify-nu.vercel.app/",
-        bgColor: "#cf0053",
-        image: isMobile ? photo4 : img4,
-      }
+      
 
     ],
     [isMobile]
