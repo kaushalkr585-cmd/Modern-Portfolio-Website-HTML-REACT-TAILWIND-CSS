@@ -34,17 +34,17 @@ export default function Logo() {
       {
         title: "Apple Particle Animation",
         bgColor: "#ff7a18",
-        video: "/videos/Apple%20Particle%20Animation.mp4",
+        video: "/ParticleAnimation.mp4",
       },
       {
         title: "Google Animation",
         bgColor: "#2a0f3f",
-        video: "/videos/Google%20Animation.mp4",
+        video: "/GoogleAnimation.mp4",
       },
       {
         title: "Korean Text Animation",
-        bgColor: "#ffffff",
-        video: "/videos/Korean%20text%20animation.mp4",
+        bgColor: "#330066",
+        video: "/LogoAnimation.mp4",
       },
     ],
     []
