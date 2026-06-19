@@ -1,5 +1,5 @@
 import { FaXTwitter, FaLinkedinIn, FaGithub, FaInstagram } from "react-icons/fa6";
-import p from "../assets/p.png";
+import p from "../assets/p.jpg";
 
 const SOCIALS = [
   { Icon: FaXTwitter, label: "X / Twitter", href: "https://x.com/kushal21175731" },
