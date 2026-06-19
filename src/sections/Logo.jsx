@@ -1,164 +1,144 @@
-import React from "react";
-import { motion, useScroll, AnimatePresence } from "framer-motion";
+import ProjectMedia from "../components/ProjectMedia";
 
-const MH3 = motion.h3;
-
-// 🔹 Custom Hook: Detects if screen size matches "mobile"
-const useIsMobile = (query = "(max-width: 639px)") => {
-  const [isMobile, setIsMobile] = React.useState(
-    typeof window !== "undefined" && window.matchMedia(query).matches
-  );
-
-  React.useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const mql = window.matchMedia(query);
-    const handler = (e) => setIsMobile(e.matches);
-
-    mql.addEventListener?.("change", handler) || mql.addListener(handler);
-
-    setIsMobile(mql.matches);
-
-    return () =>
-      mql.removeEventListener?.("change", handler) || mql.removeListener(handler);
-  }, [query]);
-
-  return isMobile;
-};
+const LOGO_PROJECTS = [
+  {
+    code: "LA-01",
+    title: "APPLE PARTICLE ANIMATION",
+    description: "Particle-based logo reveal animation for Apple, built in After Effects.",
+    tags: ["After Effects", "Motion Graphics", "Logo Animation"],
+    video: "/ParticleAnimation.mp4",
+    accentBg: "#FF4B26",
+    accentText: "#0B0B0C",
+    cardBg: "#0B0B0C",
+    textColor: "#F4EFE6",
+    tagBorder: "rgba(244,239,230,0.3)",
+  },
+  {
+    code: "LA-02",
+    title: "GOOGLE ANIMATION",
+    description: "Smooth animated Google logo reveal sequence created in After Effects.",
+    tags: ["After Effects", "Motion Graphics", "Logo Animation"],
+    video: "/GoogleAnimation.mp4",
+    accentBg: "#F5C518",
+    accentText: "#0B0B0C",
+    cardBg: "#F4EFE6",
+    textColor: "#0B0B0C",
+    tagBorder: "rgba(11,11,12,0.3)",
+  },
+  {
+    code: "LA-03",
+    title: "KOREAN TEXT ANIMATION",
+    description: "Stylized Korean text kinetic animation — experimental typography motion piece.",
+    tags: ["After Effects", "Kinetic Typography", "Motion Design"],
+    video: "/LogoAnimation.mp4",
+    accentBg: "#1E3FE0",
+    accentText: "#F4EFE6",
+    cardBg: "#0B0B0C",
+    textColor: "#F4EFE6",
+    tagBorder: "rgba(244,239,230,0.3)",
+  },
+];
 
 export default function Logo() {
-  const isMobile = useIsMobile();
-
-  const projects = React.useMemo(
-    () => [
-      {
-        title: "Apple Particle Animation",
-        bgColor: "#ff7a18",
-        video: "/ParticleAnimation.mp4",
-      },
-      {
-        title: "Google Animation",
-        bgColor: "#2a0f3f",
-        video: "/GoogleAnimation.mp4",
-      },
-      {
-        title: "Korean Text Animation",
-        bgColor: "#330066",
-        video: "/LogoAnimation.mp4",
-      },
-    ],
-    []
-  );
-
-  const sceneRef = React.useRef(null);
-
-  const { scrollYProgress } = useScroll({
-    target: sceneRef,
-    offset: ["start start", "end end"],
-  });
-
-  const thresholds = projects.map((_, i) => (i + 1) / projects.length);
-  const [activeIndex, setActiveIndex] = React.useState(0);
-
-  React.useEffect(() => {
-    const unsubscribe = scrollYProgress.onChange((v) => {
-      const idx = thresholds.findIndex((t) => v <= t);
-      setActiveIndex(idx === -1 ? thresholds.length - 1 : idx);
-    });
-
-    return () => unsubscribe();
-  }, [scrollYProgress, thresholds]);
-
-  const activeProject = projects[activeIndex];
-
   return (
     <section
       id="logo-animation-projects"
-      ref={sceneRef}
-      className="relative"
-      style={{
-        height: `${100 * projects.length}vh`,
-        backgroundColor: activeProject.bgColor,
-        transition: "background-color 400ms ease",
-      }}
+      className="py-8 md:py-12 lg:py-16"
+      style={{ background: "#0B0B0C", borderTop: "3px solid #F4EFE6" }}
+      aria-label="Logo animation projects"
     >
-      <div className="sticky top-0 h-screen flex flex-col items-center justify-center">
-        <h2
-          className={`text-3xl font-semibold z-10 text-center ${
-            isMobile ? "mt-4" : "mt-8"
-          } ${activeProject.bgColor === "#ffffff" ? "text-black" : "text-white"}`}
-        >
-          Logo Animation Projects
-        </h2>
+      {/* ── Section Header ─────────────────────────────────────── */}
+      <div style={{ borderBottom: "3px solid #F4EFE6" }} className="pb-4 mb-8">
+        <div className="global-container flex items-center gap-4">
+          <span className="font-mono text-paper text-[10px] tracking-widest uppercase opacity-50">
+            SECTION 05
+          </span>
+          <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#FF4B26" }} />
+          <h2 className="font-display text-paper text-2xl sm:text-3xl uppercase tracking-wider">
+            LOGO ANIMATIONS
+          </h2>
+        </div>
+      </div>
 
-        <div
-          className={`relative w-full flex-1 flex items-center justify-center ${
-            isMobile ? "mt-4" : ""
-          }`}
-        >
-          {projects.map((project, idx) => (
+      {/* ── Animation Cards ────────────────────────────────────── */}
+      <div className="global-container flex flex-col gap-12">
+        {LOGO_PROJECTS.map((project) => (
+          <article
+            key={project.code}
+            style={{
+              background: project.cardBg,
+              color: project.textColor,
+              border: "3px solid #F4EFE6",
+            }}
+            className="shadow-[6px_6px_0px_0px_rgba(244,239,230,0.15)]"
+            aria-label={`Logo animation: ${project.title}`}
+          >
+            {/* Color-bar Header */}
             <div
-              key={project.title}
-              className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-500 ${
-                activeIndex === idx ? "opacity-100 z-20" : "opacity-0 z-0 sm:z-10"
-              }`}
-              style={{ width: "85%", maxWidth: "1200px" }}
+              style={{
+                background: project.accentBg,
+                color: project.accentText,
+                borderBottom: "3px solid #F4EFE6",
+                padding: "0.75rem 1.5rem",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
             >
-              <AnimatePresence mode="wait">
-                {activeIndex === idx && (
-                  <MH3
-                    key={project.title}
-                    initial={{ opacity: 0, y: -30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 30 }}
-                    transition={{ duration: 0.5, ease: "easeOut" }}
-                    className={`block text-center text-[clamp(1.6rem,5vw,4rem)] sm:absolute sm:-top-21 sm:left-[35%] lg:left-[-5%] sm:mb-0 font-bangers italic font-semibold ${
-                      isMobile ? "-mt-10" : ""
-                    } ${project.bgColor === "#ffffff" ? "text-black" : "text-white"}`}
-                    style={{
-                      zIndex: 5,
-                      textAlign: isMobile ? "center" : "left",
-                    }}
-                  >
-                    {project.title}
-                  </MH3>
-                )}
-              </AnimatePresence>
-
-              <div
-                className={`relative w-full overflow-hidden shadow-2xl md:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.7)] ${
-                  isMobile
-                    ? "mb-6 rounded-xl aspect-video bg-black/30"
-                    : "mb-10 sm:mb-12 rounded-2xl h-[62vh] sm:h-[66vh] bg-black/20"
-                }`}
+              <h3 className="font-display text-base sm:text-xl uppercase tracking-wider">
+                {project.code} — {project.title}
+              </h3>
+              <span
                 style={{
-                  zIndex: 10,
-                  transition: "box-shadow 250ms ease",
+                  fontFamily: "'JetBrains Mono', monospace",
+                  fontSize: "0.6rem",
+                  fontWeight: 700,
+                  textTransform: "uppercase",
+                  padding: "2px 8px",
+                  background: "#0B0B0C",
+                  color: "#F5C518",
+                  border: "2px solid #F4EFE6",
+                  display: "inline-block",
                 }}
               >
-                <video
-                  src={project.video}
-                  className="w-full h-full object-cover"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  controls={isMobile}
-                  preload="metadata"
-                />
+                MOTION DESIGN
+              </span>
+            </div>
 
-                <div
-                  className="pointer-events-none absolute inset-0"
-                  style={{
-                    zIndex: 11,
-                    background:
-                      "linear-gradient(180deg, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0) 45%)",
-                  }}
+            {/* Content Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[45%_55%]">
+              {/* Left Column: Info */}
+              <div className="order-2 md:order-1 p-6 sm:p-8 flex flex-col gap-4 justify-center">
+                <p className="font-body text-sm sm:text-base leading-relaxed opacity-90 max-w-[50ch]">
+                  {project.description}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {project.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      style={{
+                        border: `1.5px solid ${project.tagBorder}`,
+                        color: project.textColor,
+                      }}
+                      className="font-mono text-[9px] uppercase px-2 py-0.5"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Right Column: Video Clip */}
+              <div className="order-1 md:order-2">
+                <ProjectMedia
+                  src={project.video}
+                  type="video"
+                  alt={`${project.title} Preview`}
                 />
               </div>
             </div>
-          ))}
-        </div>
+          </article>
+        ))}
       </div>
     </section>
   );

@@ -1,207 +1,140 @@
-// Importing React for building UI components
-import React from "react";
-// Importing motion components and scroll hooks from Framer Motion for animations
-import { motion, useScroll, useTransform } from "framer-motion";
-
-// Array of experience objects containing job details
-// Array of experience objects containing job details
-const experiences = [
+const EXPERIENCES = [
   {
+    code: "EX-01",
     role: "Self-Taught Web Developer",
     company: "Independent / Personal Projects",
-    duration: "2025 - Present",
+    duration: "2025 — PRESENT",
     description:
       "Learned web development independently and built responsive, modern UI projects using React, Tailwind CSS, and Framer Motion with a focus on clean design and performance.",
+    active: true,
   },
   {
+    code: "EX-02",
     role: "Database & SQL",
     company: "Learning + Practice",
-    duration: "2025 (Till June)",
+    duration: "2025 (TILL JUNE)",
     description:
       "Strengthened database fundamentals including SQL queries, normalization, and relational database concepts, with hands-on practice on real-world style datasets.",
+    active: false,
   },
-
   {
+    code: "EX-03",
     role: "Computer Vision & Machine Learning",
     company: "Learning + Projects",
     duration: "2024",
     description:
       "Explored CV/ML concepts and implemented beginner-to-intermediate projects to understand model workflows, data handling, and practical applications of machine learning.",
+    active: false,
   },
   {
+    code: "EX-04",
     role: "Python Intern",
     company: "Internship",
     duration: "2023",
     description:
       "Completed a Python internship where I worked on core programming concepts, problem-solving, and small automation/project tasks, improving my coding fundamentals.",
+    active: false,
   },
-
-  
 ];
 
-
-// Reusable component to render each experience item with animations
-function ExperienceItem({ exp, idx, start, end, scrollYProgress, layout }) {
-  // Animates the size of the marker (dot) as user scrolls
-  const markerScale = useTransform(scrollYProgress, [start, end], [0, 1]);
-  // Animates the opacity of the marker
-  const markerOpacity = useTransform(scrollYProgress, [start, end], [0, 1]);
-  // Animates the opacity of the card
-  const cardOpacity = useTransform(scrollYProgress, [start, end], [0, 1]);
-
-  // Checks if card should be displayed above or below the timeline line
-  const isAbove = idx % 2 === 0;
-  // Animates vertical movement of cards for desktop layout
-  const cardY = useTransform(scrollYProgress, [start, end], [isAbove ? 30 : -30, 0]);
-  // Animates horizontal movement of cards for mobile layout
-  const cardX = useTransform(scrollYProgress, [start, end], [-24, 0]);
-
-  // Render for Desktop layout
-  if (layout === "desktop") {
-    return (
-      <div className="relative flex-1 flex justify-center items-center min-w-0" key={`${exp.company}-${exp.role}-${idx}`}>
-        {/* Marker dot on the timeline */}
-        <motion.div
-          className="z-10 w-7 h-7 rounded-full bg-white shadow-[0_0_0_8px_rgba(255,255,255,0.1)]"
-          style={{ scale: markerScale, opacity: markerOpacity }}
-        />
-        {/* Small vertical line above or below the marker */}
-        <motion.div
-          className={`absolute ${isAbove ? "-top-8" : "-bottom-8"} w-[3px] bg-white/40`}
-          style={{ height: 40, opacity: cardOpacity }}
-        />
-        {/* Experience card with role, company, duration, description */}
-        <motion.article
-          className={`absolute ${isAbove ? "bottom-12" : "top-12"} bg-gray-900/80 backdrop-blur border border-gray-700/70 rounded-xl p-7 w-[320px] shadow-lg`}
-          style={{ opacity: cardOpacity, y: cardY, maxWidth: "90vw" }}
-          transition={{ duration: 0.4, delay: idx * 0.15 }}
-        >
-          <h3 className="text-xl font-semibold">{exp.role}</h3>
-          <p className="text-md text-gray-400 mb-3">{exp.company} | {exp.duration}</p>
-          <p className="text-md text-gray-300 break-words">{exp.description}</p>
-        </motion.article>
+export default function Experience() {
+  return (
+    <section
+      id="experience"
+      className="py-8 md:py-12 lg:py-16"
+      aria-label="Experience timeline"
+      style={{ background: "#F4EFE6", borderTop: "3px solid #0B0B0C" }}
+    >
+      {/* ── Section Header ─────────────────────────────────────── */}
+      <div style={{ borderBottom: "3px solid #0B0B0C" }} className="pb-4 mb-8">
+        <div className="global-container flex items-center gap-4">
+          <span className="font-mono text-ink text-[10px] tracking-widest uppercase opacity-50">
+            SECTION 07
+          </span>
+          <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#FF4B26" }} />
+          <h2 className="font-display text-ink text-2xl sm:text-3xl uppercase tracking-wider">
+            EXPERIENCE
+          </h2>
+        </div>
       </div>
-    );
-  }
 
-  // Render for Mobile layout
-  return (
-    <div key={`${exp.company}-${exp.role}-m-${idx}`} className="relative flex items-start">
-      {/* Marker dot on mobile timeline */}
-      <motion.div
-        className="absolute -left-[14px] top-3 z-10 w-7 h-7 rounded-full bg-white shadow-[0_0_0_8px_rgba(255,255,255,0.1)]"
-        style={{ scale: markerScale, opacity: markerOpacity }}
-      />
-      {/* Experience card (mobile version) */}
-      <motion.article
-        className="bg-gray-900/80 backdrop-blur border border-gray-700/70 rounded-xl p-5 w-[90vw] max-w-sm ml-6 shadow-lg"
-        style={{ opacity: cardOpacity, x: cardX }}
-        transition={{ duration: 0.4, delay: idx * 0.15 }}
-      >
-        <h3 className="text-lg font-semibold break-words">{exp.role}</h3>
-        <p className="text-sm text-gray-400 mb-2 break-words">{exp.company} | {exp.duration}</p>
-        <p className="text-sm text-gray-300 break-words">{exp.description}</p>
-      </motion.article>
-    </div>
-  );
-}
-
-// Main Experience component
-const Experience = () => {
-  const sceneRef = React.useRef(null); // Ref for the scrolling section
-  const [isMobile, setIsMobile] = React.useState(false); // State to track if device is mobile
-
-  // Detect window size and set isMobile state
-  React.useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
-  // Dynamic scene height based on device type and number of experiences
-  const SCENE_HEIGHT_VH = isMobile ? 100 * experiences.length * 1.6 : 100 * experiences.length * 1.2;
-
-  // Get scroll progress for animations
-  const { scrollYProgress } = useScroll({ target: sceneRef, offset: ["start start", "end end"] });
-
-  // Calculate thresholds for each experience card's animation start/end
-  const numExperiences = experiences.length;
-  const thresholds = React.useMemo(
-    () => Array.from({ length: numExperiences }, (_, i) => (i + 1) / numExperiences),
-    [numExperiences]
-  );
-
-  // Animate timeline line width (desktop) and height (mobile)
-  const lineWidth = useTransform(scrollYProgress, (v) => `${v * 100}%`);
-  const lineHeight = useTransform(scrollYProgress, (v) => `${v * 100}%`);
-
-  return (
-    <section id="experience" className="relative bg-black text-white">
-      {/* Main container with dynamic height */}
-      <div ref={sceneRef} style={{ height: `${SCENE_HEIGHT_VH}vh`, minHeight: "120vh" }} className="relative">
-        <div className="sticky top-0 h-screen flex flex-col">
-          {/* Section Title */}
-          <div className="shrink-0 px-6 pt-8">
-            <h2 className="text-4xl sm:text-5xl font-semibold mt-5 text-center">Experience</h2>
-          </div>
-          {/* Timeline container */}
-          <div className="flex-1 flex items-center justify-center px-6 pb-10">
-            {/* Desktop Timeline */}
-            <div className="relative w-full max-w-7xl hidden md:block">
-              {/* Horizontal timeline line */}
-              <div className="relative h-[6px] bg-white/15 rounded">
-                <motion.div className="absolute left-0 top-0 h-[6px] bg-white rounded origin-left" style={{ width: lineWidth }} />
+      {/* ── Experience Rows ───────────────────────────────────── */}
+      <div className="global-container">
+        <div style={{ border: "3px solid #0B0B0C" }} className="shadow-[6px_6px_0px_0px_#0B0B0C]">
+          {EXPERIENCES.map((exp, idx) => (
+            <article
+              key={exp.code}
+              style={{
+                borderBottom: idx < EXPERIENCES.length - 1 ? "3px solid #0B0B0C" : "none",
+                background: exp.active ? "#0B0B0C" : "#F4EFE6",
+                color: exp.active ? "#F4EFE6" : "#0B0B0C",
+              }}
+              className="grid grid-cols-1 md:grid-cols-[240px_1fr]"
+              aria-label={`Experience: ${exp.role}`}
+            >
+              {/* Left Metadata Column */}
+              <div
+                style={{
+                  padding: "1.5rem",
+                  justifyContent: "center",
+                }}
+                className="flex flex-col gap-1.5 border-b-3 md:border-b-0 md:border-r-3 border-ink"
+              >
+                <span
+                  className="font-mono text-[10px] tracking-wider uppercase"
+                  style={{
+                    color: exp.active ? "#FF4B26" : "rgba(11,11,12,0.4)",
+                  }}
+                >
+                  {exp.code}
+                </span>
+                <span className="font-mono text-xs tracking-wide uppercase opacity-70">
+                  {exp.duration}
+                </span>
+                {exp.active && (
+                  <span
+                    style={{
+                      fontFamily: "'JetBrains Mono', monospace",
+                      fontSize: "0.55rem",
+                      fontWeight: 700,
+                      textTransform: "uppercase",
+                      letterSpacing: "0.1em",
+                      padding: "2px 6px",
+                      background: "#FF4B26",
+                      color: "#0B0B0C",
+                      border: "2px solid #FF4B26",
+                      display: "inline-block",
+                      width: "fit-content",
+                      marginTop: "0.25rem",
+                    }}
+                  >
+                    CURRENT
+                  </span>
+                )}
               </div>
-              {/* Experience items mapped for desktop */}
-              <div className="relative flex justify-between mt-0">
-                {experiences.map((exp, idx) => {
-                  const start = idx === 0 ? 0 : thresholds[idx - 1];
-                  const end = thresholds[idx];
-                  return (
-                    <ExperienceItem
-                      key={`${exp.company}-${exp.role}-${idx}`}
-                      exp={exp}
-                      idx={idx}
-                      start={start}
-                      end={end}
-                      scrollYProgress={scrollYProgress}
-                      layout="desktop"
-                    />
-                  );
-                })}
+
+              {/* Right Content Column */}
+              <div
+                style={{
+                  padding: "1.5rem sm:padding:2rem",
+                  justifyContent: "center",
+                }}
+                className="flex flex-col gap-2 p-6 sm:p-8"
+              >
+                <h3 className="font-display text-lg sm:text-xl uppercase leading-snug">
+                  {exp.role}
+                </h3>
+                <p className="font-mono text-xs tracking-wider uppercase opacity-60">
+                  {exp.company}
+                </p>
+                <p className="font-body text-sm sm:text-base leading-relaxed opacity-85 max-w-[65ch] mt-1">
+                  {exp.description}
+                </p>
               </div>
-            </div>
-            {/* Mobile Timeline */}
-            <div className="relative w-full max-w-md md:hidden">
-              {/* Vertical timeline line */}
-              <div className="absolute left-0 top-0 bottom-0 w-[6px] bg-white/15 rounded">
-                <motion.div className="absolute top-0 left-0 w-[6px] bg-white rounded origin-top" style={{ height: lineHeight }} />
-              </div>
-              {/* Experience items mapped for mobile */}
-              <div className="relative flex flex-col gap-10 ml-10 mt-6 pb-28">
-                {experiences.map((exp, idx) => {
-                  const start = idx === 0 ? 0 : thresholds[idx - 1];
-                  const end = thresholds[idx];
-                  return (
-                    <ExperienceItem
-                      key={`${exp.company}-${exp.role}-m-${idx}`}
-                      exp={exp}
-                      idx={idx}
-                      start={start}
-                      end={end}
-                      scrollYProgress={scrollYProgress}
-                      layout="mobile"
-                    />
-                  );
-                })}
-              </div>
-            </div>
-          </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>
   );
-};
-
-export default Experience; // Exporting Experience component
+}

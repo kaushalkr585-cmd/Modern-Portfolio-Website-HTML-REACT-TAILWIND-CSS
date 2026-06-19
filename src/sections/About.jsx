@@ -1,131 +1,125 @@
-import { motion } from "framer-motion";
-import p from "../assets/p.png";
-
 export default function About() {
   return (
     <section
       id="about"
-      className="min-h-screen w-full flex items-center justify-center relative bg-black text-white overflow-hidden"
-      aria-label="About me"
+      style={{ background: "#F4EFE6", borderTop: "3px solid #0B0B0C" }}
+      className="py-8 md:py-12 lg:py-16"
+      aria-label="About Kaushal Kumar"
     >
-      {/* Layered neon background accents */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute -top-10 -left-10 w-[360px] h-[360px] rounded-full bg-gradient-to-r from-[#302b63] via-[#00bf8f] to-[#1CD8D2] opacity-20 blur-[120px] animate-pulse" />
-        <div className="absolute bottom-0 right-10 w-[420px] h-[420px] rounded-full bg-gradient-to-r from-[#1CD8D2] via-[#00bf8f] to-[#302b63] opacity-15 blur-[140px] animate-pulse delay-300" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-20 w-[220px] h-[220px] rounded-full bg-gradient-to-r from-[#00bf8f] to-[#1CD8D2] opacity-10 blur-[100px]" />
+      {/* ── Section Header ─────────────────────────────────────── */}
+      <div style={{ borderBottom: "3px solid #0B0B0C" }} className="pb-4 mb-8">
+        <div className="global-container flex items-center gap-4">
+          <span className="font-mono text-ink text-[10px] tracking-widest uppercase opacity-50">
+            SECTION 02
+          </span>
+          <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#FF4B26" }} />
+          <h2 className="font-display text-ink text-2xl sm:text-3xl uppercase tracking-wider">
+            ABOUT
+          </h2>
+        </div>
       </div>
 
-      {/* Content container */}
-      <div className="relative z-10 max-w-6xl w-full mx-auto px-6 md:px-10 lg:px-12 py-20 flex flex-col gap-12">
-        {/* Profile header */}
-        <motion.div
-          className="flex flex-col md:flex-row items-center md:items-stretch gap-8"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true, amount: 0.4 }}
-        >
-          {/* Avatar / Card */}
-          <motion.div
-            className="relative w-[160px] h-[160px] md:w-[200px] md:h-[200px] rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-[#1CD8D2]/20 to-[#302b63]/20 border border-[#1CD8D2]/25"
-            whileHover={{ scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 200, damping: 18 }}
-            aria-hidden="true"
-          >
-            {/* Replace with your actual avatar image */}
+      <div className="global-container">
+        {/* Top: Biography (Text-only layout) */}
+        <div className="border-b-3 border-ink pb-10 mb-10 text-ink">
+          <p className="font-mono text-orange text-[10px] tracking-widest uppercase mb-2">
+            EST. 2024
+          </p>
+          <h3 className="font-display text-2xl sm:text-3xl uppercase mb-3">
+            Kaushal Kumar — Full Stack Developer
+          </h3>
+          <p className="font-body text-base leading-relaxed max-w-[80ch] mb-4">
+            I am a Full Stack Developer passionate about building fast, reliable web
+            applications with clean code and strong performance. I specialize in the MERN
+            Stack, and I also work as a Motion Graphics Designer and Video Editor using After
+            Effects and Premiere Pro.
+          </p>
+          <p className="font-body text-sm leading-relaxed max-w-[80ch] text-ink/75">
+            I love turning ideas into scalable, user-friendly products that make an impact.
+            Always looking to push boundaries and build clean, intentional interfaces.
+          </p>
+        </div>
 
-            <div className="absolute inset-0 " />
-
-            <img src={p} alt="test" />
-          </motion.div>
-
-          {/* Name + Role + Bio + CTAs */}
-          <div className="flex-1 flex flex-col justify-center text-center md:text-left">
-            <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[#1CD8D2] via-[#00bf8f] to-[#302b63]">
-              Kaushal Kumar
-            </h2>
-            <p className="mt-2 text-lg sm:text-xl text-white/90 font-semibold">
-              Full Stack Developer
-            </p>
-
-            <p className="mt-4 text-gray-300 leading-relaxed text-base sm:text-lg max-w-2xl md:max-w-3xl">
-              I build modern, scalable web applications with a strong focus on
-              clean code, user-friendly UI, and performance. My toolkit includes
-              HTML, CSS, JavaScript, React, Node.js, MongoDB, and MySQL, helping
-              me bring ideas to life from concept to deployment with reliable
-              backend logic and smooth interfaces. Along with development, I
-              also create motion graphics and edit professional videos using
-              Adobe After Effects and Premiere Pro.
-            </p>
-
-            {/* Quick stats */}
-            <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 max-w-xl">
-              {[
-                { label: "Experience", value: "1 year" },
-                { label: "Specialty", value: "Full Stack" },
-                { label: "Focus", value: "Performance & UX" },
-              ].map((item, i) => (
-                <motion.div
-                  key={i}
-                  className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-center"
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: 0.05 * i }}
-                  viewport={{ once: true, amount: 0.3 }}
-                >
-                  <div className="text-sm text-gray-400">{item.label}</div>
-                  <div className="text-base font-semibold text-white">
-                    {item.value}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* CTAs */}
-            <div className="mt-6 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center md:justify-start">
-              <a
-                href="#web-development-projects"
-                className="inline-flex items-center justify-center rounded-lg bg-white text-black font-semibold px-5 py-3 hover:bg-gray-200 transition"
-              >
-                View Projects
-              </a>
-
-              <a
-                href="#contact"
-                className="inline-flex items-center justify-center rounded-lg border border-white/20 bg-white/10 text-white px-5 py-3 hover:bg-white/20 transition"
-                aria-label="Get in touch"
-              >
-                Get in Touch
-              </a>
+        {/* Bottom Details Grid (No Profile Image) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12 text-ink">
+          {/* Education Block */}
+          <div className="border-3 border-ink p-6 bg-paper flex flex-col gap-3 shadow-[4px_4px_0px_0px_#0B0B0C]">
+            <h4 className="font-display text-xl uppercase border-b-2 border-ink pb-2 text-orange">
+              EDUCATION
+            </h4>
+            <div className="font-body text-sm flex flex-col gap-1.5">
+              <span className="font-bold">B.TECH CSE</span>
+              <span className="font-mono text-xs text-ink/70">NIST UNIVERSITY · 2022–2026</span>
+              <span className="font-mono text-xs text-ink/70">CGPA: 8.5</span>
             </div>
           </div>
-        </motion.div>
 
-        {/* Body copy only — removed skills chip grid */}
-        <div className="grid md:grid-cols-1">
-          <motion.div
-            className="text-center md:text-left"
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true, amount: 0.4 }}
-          >
-            <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3">
-              About Me
-            </h3>
-            <p className="text-gray-300 leading-relaxed text-base sm:text-lg">
-              I’m a Software Developer and Web Developer — passionate about
-              building fast, reliable web applications with clean code, smooth
-              user experiences, and strong performance. Along with development,
-              I’m also a Motion Graphics Designer and Video Editor, creating
-              engaging visuals using Adobe After Effects and Premiere Pro.
-            </p>
+          {/* Core Stack Block */}
+          <div className="border-3 border-ink p-6 bg-paper flex flex-col gap-3 shadow-[4px_4px_0px_0px_#0B0B0C]">
+            <h4 className="font-display text-xl uppercase border-b-2 border-ink pb-2 text-blue">
+              CORE STACK
+            </h4>
+            <ul className="font-mono text-xs flex flex-col gap-2 uppercase tracking-wide">
+              <li className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 bg-blue" />
+                <span>MERN (MongoDB, Express, React, Node)</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 bg-blue" />
+                <span>TypeScript</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 bg-blue" />
+                <span>Docker & Dev Tools</span>
+              </li>
+            </ul>
+          </div>
 
-            <p className="mt-4 text-gray-400 text-base sm:text-lg">
-              I love turning ideas into scalable, user‑friendly products that
-              make an impact.
-            </p>
-          </motion.div>
+          {/* Interests Block */}
+          <div className="border-3 border-ink p-6 bg-paper flex flex-col gap-3 shadow-[4px_4px_0px_0px_#0B0B0C]">
+            <h4 className="font-display text-xl uppercase border-b-2 border-ink pb-2 text-ink">
+              INTERESTS
+            </h4>
+            <ul className="font-mono text-xs flex flex-col gap-2 uppercase tracking-wide">
+              <li className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 bg-orange" />
+                <span>Video Editing</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 bg-orange" />
+                <span>Motion Design</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 bg-orange" />
+                <span>AI Integration</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 bg-orange" />
+                <span>Web Development</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Work Philosophy Block */}
+          <div className="border-3 border-ink p-6 bg-paper flex flex-col gap-3 shadow-[4px_4px_0px_0px_#0B0B0C]">
+            <h4 className="font-display text-xl uppercase border-b-2 border-ink pb-2 text-ink">
+              WORK PHILOSOPHY
+            </h4>
+            <ul className="font-mono text-xs flex flex-col gap-2 uppercase tracking-wide">
+              <li className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 bg-ink" />
+                <span>Build scalable & lightning-fast apps</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 bg-ink" />
+                <span>Focus on clean design & performance</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 bg-ink" />
+                <span>Open to remote & full-stack roles</span>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>

@@ -1,67 +1,352 @@
 @import "tailwindcss";
 
+/* ─── Design Tokens ─────────────────────────────────────────────────────────── */
+@theme {
+  /* Colors */
+  --color-ink: #0B0B0C;
+  --color-paper: #F4EFE6;
+  --color-orange: #FF4B26;
+  --color-blue: #1E3FE0;
+  --color-yellow: #F5C518;
+  --color-line: #0B0B0C;
 
-@keyframes gradientBG {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  /* Typography */
+  --font-display: 'Anton', sans-serif;
+  --font-body: 'Space Grotesk', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
 }
 
-.animate-gradient {
-  background-size: 300% 300%;
-  animation: gradientBG 10s ease infinite;
+/* ─── Base ───────────────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-@layer utilities {
-  .animated-gradient {
-    background: linear-gradient(-45deg, #302b63, #00bf8f, #1CD8D2);
-    background-size: 400% 400%;
-    animation: gradientShift 12s ease infinite;
-  }
-
-  @keyframes gradientShift {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-  }
+html {
+  scroll-behavior: smooth;
 }
 
-/* Delay utilities for staggered animations */
-.delay-200 { transition-delay: 200ms; }
-.delay-300 { transition-delay: 300ms; }
-.delay-400 { transition-delay: 400ms; }
-
-
-@keyframes fadeInUp {
-  0% { opacity: 0; transform: translateY(20px) scale(0.95); }
-  100% { opacity: 1; transform: translateY(0) scale(1); }
+body {
+  font-family: 'Space Grotesk', sans-serif;
+  background: #0B0B0C;
+  color: #F4EFE6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.animate-fadeInUp {
-  animation: fadeInUp 0.8s ease forwards;
-  opacity: 0;
+/* ─── Typography Utilities ───────────────────────────────────────────────────── */
+.font-display {
+  font-family: 'Anton', sans-serif;
+}
+.font-body {
+  font-family: 'Space Grotesk', sans-serif;
+}
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
 }
 
-@keyframes floating {
-  0% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-8px) rotate(0.5deg); }
-  100% { transform: translateY(0px) rotate(0deg); }
+/* ─── Border System ──────────────────────────────────────────────────────────── */
+.border-rule {
+  border: 3px solid #0B0B0C;
+}
+.border-rule-2 {
+  border: 2px solid #0B0B0C;
+}
+.border-rule-paper {
+  border: 3px solid #F4EFE6;
+}
+.border-rule-paper-2 {
+  border: 2px solid #F4EFE6;
+}
+.border-rule-orange {
+  border: 3px solid #FF4B26;
+}
+.border-t-rule {
+  border-top: 3px solid #0B0B0C;
+}
+.border-b-rule {
+  border-bottom: 3px solid #0B0B0C;
+}
+.border-t-rule-paper {
+  border-top: 3px solid #F4EFE6;
 }
 
-.floating-card {
-  animation: floating 4s ease-in-out infinite;
+/* ─── Tag Chip ───────────────────────────────────────────────────────────────── */
+.tag-chip {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 2px 8px;
+  border: 2px solid #0B0B0C;
+  color: #0B0B0C;
+  background: transparent;
+  line-height: 1.6;
 }
 
+.tag-chip-paper {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 2px 8px;
+  border: 2px solid #F4EFE6;
+  color: #F4EFE6;
+  background: transparent;
+  line-height: 1.6;
+}
 
+/* ─── Badge ──────────────────────────────────────────────────────────────────── */
+.badge-live {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 2px 8px;
+  background: #F5C518;
+  color: #0B0B0C;
+  border: 2px solid #0B0B0C;
+}
 
+/* ─── Buttons ────────────────────────────────────────────────────────────────── */
+.btn-primary {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 10px 20px;
+  background: #FF4B26;
+  color: #0B0B0C;
+  border: 3px solid #FF4B26;
+  cursor: pointer;
+  transition: background 120ms linear, color 120ms linear;
+  text-decoration: none;
+}
+.btn-primary:hover {
+  background: #0B0B0C;
+  color: #FF4B26;
+}
+.btn-primary:active {
+  transform: translate(1px, 1px);
+}
+
+.btn-outline {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 10px 20px;
+  background: transparent;
+  color: #F4EFE6;
+  border: 3px solid #F4EFE6;
+  cursor: pointer;
+  transition: background 120ms linear, color 120ms linear;
+  text-decoration: none;
+}
+.btn-outline:hover {
+  background: #F4EFE6;
+  color: #0B0B0C;
+}
+.btn-outline:active {
+  transform: translate(1px, 1px);
+}
+
+.btn-outline-ink {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 10px 20px;
+  background: transparent;
+  color: #0B0B0C;
+  border: 3px solid #0B0B0C;
+  cursor: pointer;
+  transition: background 120ms linear, color 120ms linear;
+  text-decoration: none;
+}
+.btn-outline-ink:hover {
+  background: #0B0B0C;
+  color: #F4EFE6;
+}
+.btn-outline-ink:active {
+  transform: translate(1px, 1px);
+}
+
+/* ─── Nav Link ───────────────────────────────────────────────────────────────── */
+.nav-link {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #0B0B0C;
+  text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: 2px solid transparent;
+  transition: border-color 120ms linear;
+}
+.nav-link:hover {
+  border-bottom-color: #FF4B26;
+}
+.nav-link:focus-visible {
+  outline: 2px solid #FF4B26;
+  outline-offset: 2px;
+}
+
+/* ─── Ticker / Utility Bar ───────────────────────────────────────────────────── */
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.ticker-track {
+  display: flex;
+  white-space: nowrap;
+  animation: ticker 40s linear infinite;
+  will-change: transform;
+}
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+
+/* ─── Focus Styles ───────────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid #FF4B26;
+  outline-offset: 2px;
+}
+
+/* ─── Section Rule Lines ─────────────────────────────────────────────────────── */
+.section-divider {
+  width: 100%;
+  height: 3px;
+  background: #0B0B0C;
+}
+
+/* ─── Skill Card Grid ────────────────────────────────────────────────────────── */
+.skill-card {
+  border: 3px solid #0B0B0C;
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: #F4EFE6;
+  transition: background 120ms linear, color 120ms linear;
+}
+.skill-card:hover {
+  background: #0B0B0C;
+  color: #F4EFE6;
+}
+.skill-card:hover .skill-code {
+  color: #FF4B26;
+}
+.skill-card:hover .skill-category {
+  border-color: #F4EFE6;
+  color: #F4EFE6;
+}
+
+/* ─── Project Block ──────────────────────────────────────────────────────────── */
+.project-block {
+  border: 3px solid #0B0B0C;
+  overflow: hidden;
+}
+
+/* ─── Sticker Badge ──────────────────────────────────────────────────────────── */
+.sticker-badge {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: #F5C518;
+  border: 3px solid #0B0B0C;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(15deg);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #0B0B0C;
+  text-align: center;
+  line-height: 1.3;
+  padding: 10px;
+}
+
+/* ─── Mobile overflow fix ────────────────────────────────────────────────────── */
 @media (max-width: 640px) {
   body > *:not(#contact):not(footer) {
     overflow-x: clip;
+  }
+}
+
+/* ─── Refactor Global Container & Media Helper ───────────────── */
+.global-container {
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 32px;
+  padding-right: 32px;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .global-container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+.brutalist-media-container {
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+  border: 3px solid #0B0B0C;
+  background-color: #0B0B0C;
+  display: block;
+}
+
+@media (max-width: 1024px) {
+  .brutalist-media-container {
+    height: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .brutalist-media-container {
+    height: 220px;
+  }
+}
+
+.brutalist-media-container video,
+.brutalist-media-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ─── Project Media Dimension Wrappers ──────────────────────── */
+.project-media-wrapper {
+  --media-max-height: 500px;
+}
+@media (max-width: 1024px) {
+  .project-media-wrapper {
+    --media-max-height: 400px;
+  }
+}
+@media (max-width: 768px) {
+  .project-media-wrapper {
+    --media-max-height: 280px;
   }
 }

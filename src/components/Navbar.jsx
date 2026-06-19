@@ -1,109 +1,286 @@
-import { useState, useEffect, useRef } from "react";
-import OverlayMenu from "./OverlayMenu";
-import { FiMenu } from "react-icons/fi";
-import logo from "../assets/logo.png"; // Adjust path
+import { useState, useEffect } from "react";
+
+const NAV_LINKS = [
+  { label: "WORK", href: "#web-development-projects" },
+  { label: "SKILLS", href: "#skills" },
+  { label: "ABOUT", href: "#about" },
+  { label: "CONTACT", href: "#contact" },
+];
+
+const TICKER_TEXT =
+  "OPEN TO FULL-STACK ROLES · B.TECH CS '26 · NIST UNIVERSITY · BASED IN INDIA · OPEN TO REMOTE · MERN STACK DEVELOPER · ";
 
 export default function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [visible, setVisible] = useState(true);
-  const [forceVisible, setForceVisible] = useState(false);
-  const lastScrollY = useRef(0);
-  const timerId = useRef(null);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
-    const homeSection = document.querySelector("#home");
+    const sections = [
+      "web-development-projects",
+      "logo-animation-projects",
+      "music-video-edit",
+      "experience",
+      "skills",
+      "about",
+      "contact",
+    ];
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
+    const observerOptions = {
+      root: null,
+      rootMargin: "-40% 0px -50% 0px", // triggers when section occupies center part of screen
+      threshold: 0,
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          setForceVisible(true);
-          setVisible(true); // Always visible on homepage
-        } else {
-          setForceVisible(false);
+          const id = entry.target.id;
+          if (
+            [
+              "web-development-projects",
+              "logo-animation-projects",
+              "music-video-edit",
+              "experience",
+            ].includes(id)
+          ) {
+            setActiveSection("WORK");
+          } else if (id === "skills") {
+            setActiveSection("SKILLS");
+          } else if (id === "about") {
+            setActiveSection("ABOUT");
+          } else if (id === "contact") {
+            setActiveSection("CONTACT");
+          }
         }
-      },
-      { threshold: 0.1 }
-    );
+      });
+    }, observerOptions);
 
-    if (homeSection) observer.observe(homeSection);
+    sections.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
 
     return () => {
-      if (homeSection) observer.unobserve(homeSection);
+      sections.forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) observer.unobserve(el);
+      });
     };
   }, []);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      // If on homepage, never hide navbar
-      if (forceVisible) {
-        setVisible(true);
-        return;
-      }
-
-      const currentScrollY = window.scrollY;
-
-      if (currentScrollY > lastScrollY.current) {
-        // scrolling down -> hide
-        setVisible(false);
-      } else {
-        // scrolling up -> show
-        setVisible(true);
-
-        // hide again after 3sec idle
-        if (timerId.current) clearTimeout(timerId.current);
-        timerId.current = setTimeout(() => {
-          setVisible(false);
-        }, 3000);
-      }
-
-      lastScrollY.current = currentScrollY;
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      if (timerId.current) clearTimeout(timerId.current);
-    };
-  }, [forceVisible]);
-
   return (
     <>
-      <nav
-        className={`fixed top-0 left-0 w-full flex items-center justify-between px-6 py-4 z-50 transition-transform duration-300 ${
-          visible ? "translate-y-0" : "-translate-y-full"
-        }`}
+      {/* ── Utility Bar ─────────────────────────────────────────── */}
+      <div
+        style={{
+          background: "#FF4B26",
+          borderBottom: "3px solid #0B0B0C",
+          overflow: "hidden",
+        }}
+        aria-label="Status bar"
       >
-        {/* Logo */}
-        <div className="flex items-center space-x-1">
-          <img src={logo} alt="Logo" className="w-12 h-12" />
-          <div className="text-2xl font-bold text-white hidden sm:block">
-            Kaushal
-          </div>
+        <div className="ticker-track py-1">
+          {/* Doubled for seamless loop */}
+          {[0, 1].map((n) => (
+            <span
+              key={n}
+              className="font-mono text-ink text-[10px] tracking-widest uppercase font-bold"
+              style={{ paddingRight: "4rem" }}
+              aria-hidden={n === 1}
+            >
+              {TICKER_TEXT}
+              {TICKER_TEXT}
+            </span>
+          ))}
         </div>
+      </div>
 
-        {/* Menu Button */}
-        <div className="block lg:absolute lg:left-1/2 lg:transform lg:-translate-x-1/2">
-          <button
-            onClick={() => setMenuOpen(true)}
-            className="text-white text-3xl focus:outline-none"
-            aria-label="Open menu"
-          >
-            <FiMenu />
-          </button>
-        </div>
-
-        {/* Contact Button (OLD STYLE - only Desktop) */}
-        <div className="hidden lg:block">
+      {/* ── Main Nav ────────────────────────────────────────────── */}
+      <nav
+        style={{
+          background: "#F4EFE6",
+          borderBottom: "2px solid #0B0B0C",
+          position: "sticky",
+          top: 0,
+          zIndex: 100,
+          height: "75px",
+        }}
+        aria-label="Main navigation"
+      >
+        <div className="flex items-center justify-between px-4 md:px-8 h-full">
+          {/* Logo wordmark */}
           <a
-            href="#contact"
-            className="bg-gradient-to-r from-pink-500 to-blue-500 text-white px-5 py-2 rounded-full font-medium shadow-lg hover:opacity-90 transition-opacity duration-300"
+            href="#home"
+            aria-label="Kaushal Kumar — home"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: 48,
+              height: 48,
+              background: "#0B0B0C",
+              border: "3px solid #0B0B0C",
+              color: "#F4EFE6",
+              fontFamily: "'Anton', sans-serif",
+              fontSize: "1.5rem",
+              letterSpacing: "0.02em",
+              textDecoration: "none",
+              flexShrink: 0,
+            }}
           >
-            Reach Out
+            KK
           </a>
+
+          {/* Desktop/Tablet nav links */}
+          <div className="hidden md:flex items-center gap-4 lg:gap-8">
+            {NAV_LINKS.map(({ label, href }) => (
+              <a
+                key={label}
+                href={href}
+                className="nav-link"
+                style={{
+                  color: activeSection === label ? "#FF4B26" : "#0B0B0C",
+                  borderBottomColor:
+                    activeSection === label ? "#FF4B26" : "transparent",
+                }}
+              >
+                {label}
+              </a>
+            ))}
+          </div>
+
+          {/* Name Display on Right */}
+          <span
+            className="hidden md:inline-block font-display text-ink"
+            style={{
+              fontSize: "clamp(1.1rem, 2vw, 1.5rem)",
+              textTransform: "uppercase",
+              letterSpacing: "0.05em",
+              whiteSpace: "nowrap",
+            }}
+          >
+            KAUSHAL KUMAR
+          </span>
+
+          {/* Mobile hamburger */}
+          <button
+            className="md:hidden flex flex-col justify-center items-center gap-[5px] w-9 h-9 focus:outline-none focus-visible:outline-orange-500"
+            onClick={() => setDrawerOpen(true)}
+            aria-label="Open menu"
+            aria-expanded={drawerOpen}
+          >
+            <span
+              style={{
+                display: "block",
+                width: 22,
+                height: 3,
+                background: "#0B0B0C",
+              }}
+            />
+            <span
+              style={{
+                display: "block",
+                width: 22,
+                height: 3,
+                background: "#0B0B0C",
+              }}
+            />
+            <span
+              style={{
+                display: "block",
+                width: 14,
+                height: 3,
+                background: "#0B0B0C",
+              }}
+            />
+          </button>
         </div>
       </nav>
 
-      <OverlayMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
+      {/* ── Mobile Drawer ───────────────────────────────────────── */}
+      {drawerOpen && (
+        <div
+          style={{
+            position: "fixed",
+            inset: 0,
+            background: "#0B0B0C",
+            zIndex: 110,
+            display: "flex",
+            flexDirection: "column",
+            padding: "2rem",
+          }}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Navigation menu"
+        >
+          {/* Close */}
+          <div className="flex justify-between items-center mb-12">
+            <span
+              style={{
+                fontFamily: "'Anton', sans-serif",
+                fontSize: "1.5rem",
+                color: "#F4EFE6",
+                letterSpacing: "0.04em",
+              }}
+            >
+              KK
+            </span>
+            <button
+              onClick={() => setDrawerOpen(false)}
+              aria-label="Close menu"
+              style={{
+                color: "#F4EFE6",
+                fontSize: "1.5rem",
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                fontFamily: "'JetBrains Mono', monospace",
+                lineHeight: 1,
+              }}
+            >
+              ✕
+            </button>
+          </div>
+
+          {/* Links */}
+          <nav className="flex flex-col gap-6">
+            {NAV_LINKS.map(({ label, href }) => (
+              <a
+                key={label}
+                href={href}
+                onClick={() => setDrawerOpen(false)}
+                style={{
+                  fontFamily: "'Anton', sans-serif",
+                  fontSize: "clamp(2.5rem, 8vw, 4rem)",
+                  color: activeSection === label ? "#FF4B26" : "#F4EFE6",
+                  textDecoration: "none",
+                  borderBottom: "2px solid rgba(244,239,230,0.15)",
+                  paddingBottom: "0.75rem",
+                  display: "block",
+                  transition: "color 120ms linear",
+                }}
+              >
+                {label}
+              </a>
+            ))}
+          </nav>
+
+          {/* Name in Drawer */}
+          <div style={{ marginTop: "auto", paddingTop: "2rem" }}>
+            <span
+              style={{
+                fontFamily: "'Anton', sans-serif",
+                fontSize: "2rem",
+                color: "#FF4B26",
+                letterSpacing: "0.05em",
+                textTransform: "uppercase",
+              }}
+            >
+              KAUSHAL KUMAR
+            </span>
+          </div>
+        </div>
+      )}
     </>
   );
 }

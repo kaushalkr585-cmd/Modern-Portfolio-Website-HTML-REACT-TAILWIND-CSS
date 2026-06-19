@@ -1,206 +1,84 @@
-import {
-  FaJava,
-  FaReact,
-  FaHtml5,
-  FaCss3Alt,
-  FaNodeJs,
-} from "react-icons/fa";
-import {
-  SiNextdotjs,
-  SiTypescript,
-  SiTailwindcss,
-  SiFastapi,
-  SiPython,
-  SiDocker,
-  SiMongodb,
-  SiAngular,
-  SiExpress,
-} from "react-icons/si";
-import { DiNodejsSmall } from "react-icons/di";
-import { motion, useMotionValue } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
-
-// ✅ Your assets icons (make sure path is correct)
-import AfterEffectsIcon from "../assets/after-effects.png";
-import PremiereProIcon from "../assets/premiere.png";
-import PhotoshopIcon from "../assets/photoshop.png";
+const SKILL_GROUPS = [
+  {
+    category: "FRONTEND",
+    skills: ["React", "Next.js", "Tailwind CSS", "JavaScript", "TypeScript", "HTML & CSS"],
+  },
+  {
+    category: "BACKEND",
+    skills: ["Node.js", "Express.js", "RESTful APIs", "Python", "Redux Toolkit"],
+  },
+  {
+    category: "DATABASE",
+    skills: ["MongoDB", "PostgreSQL", "MySQL", "Database Normalization", "SQL Queries"],
+  },
+  {
+    category: "AI/ML",
+    skills: ["LLM Integrations", "Prompt Engineering", "OpenCV Basics", "Model Workflows"],
+  },
+  {
+    category: "TOOLS & DEVOPS",
+    skills: ["Git & GitHub", "Docker", "CI/CD Pipelines", "Vercel Deployment", "Postman API Test"],
+  },
+  {
+    category: "DESIGN & VIDEO",
+    skills: ["After Effects", "Premiere Pro", "Photoshop", "Figma", "Motion Graphics"],
+  },
+];
 
 export default function Skills() {
-  // ✅ Cyan filter for PNG icons (to match #1cd8d2)
-  const cyanFilter =
-    "brightness(0) saturate(100%) invert(77%) sepia(34%) saturate(1100%) hue-rotate(125deg) brightness(95%) contrast(95%)";
-
-  const skills = [
-    { icon: <FaHtml5 />, name: "HTML" },
-    { icon: <FaCss3Alt />, name: "CSS" },
-    { icon: <FaReact />, name: "React" },
-    { icon: <FaNodeJs />, name: "Node.js" },
-    { icon: <SiExpress />, name: "Express.js" },
-    { icon: <SiMongodb />, name: "MongoDB" },
-    { icon: <SiPython />, name: "Python" },
-
-    {
-      icon: (
-        <img
-          src={AfterEffectsIcon}
-          alt="After Effects"
-          className="w-14 h-14 object-contain"
-          style={{ filter: cyanFilter }}
-        />
-      ),
-      name: "After Effects",
-    },
-    {
-      icon: (
-        <img
-          src={PremiereProIcon}
-          alt="Premiere Pro"
-          className="w-14 h-14 object-contain"
-          style={{ filter: cyanFilter }}
-        />
-      ),
-      name: "Premiere Pro",
-    },
-    {
-      icon: (
-        <img
-          src={PhotoshopIcon}
-          alt="Photoshop"
-          className="w-14 h-14 object-contain"
-          style={{ filter: cyanFilter }}
-        />
-      ),
-      name: "Photoshop",
-    },
-  ];
-
-  const repeated = [...skills, ...skills];
-
-  const [dir, setDir] = useState(-1);
-  const [active, setActive] = useState(false);
-  const sectionRef = useRef(null);
-  const trackRef = useRef(null);
-  const touchY = useRef(null);
-  const x = useMotionValue(0);
-
-  useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        setActive(entry.isIntersecting && entry.intersectionRatio > 0.1);
-      },
-      { threshold: [0.1] }
-    );
-
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!active) return;
-
-    const onWheel = (e) => setDir(e.deltaY > 0 ? -1 : 1);
-    const onTouchStart = (e) => (touchY.current = e.touches[0].clientY);
-    const onTouchMove = (e) => {
-      if (touchY.current == null) return;
-      const delta = e.touches[0].clientY - touchY.current;
-      setDir(delta > 0 ? 1 : -1);
-      touchY.current = e.touches[0].clientY;
-    };
-
-    window.addEventListener("wheel", onWheel, { passive: true });
-    window.addEventListener("touchstart", onTouchStart, { passive: true });
-    window.addEventListener("touchmove", onTouchMove, { passive: true });
-
-    return () => {
-      window.removeEventListener("wheel", onWheel);
-      window.removeEventListener("touchstart", onTouchStart);
-      window.removeEventListener("touchmove", onTouchMove);
-    };
-  }, [active]);
-
-  useEffect(() => {
-    let id;
-    let last = performance.now();
-    const SPEED = 80;
-
-    const tick = (now) => {
-      const dt = (now - last) / 1000;
-      last = now;
-
-      let next = x.get() + SPEED * dir * dt;
-      const loop = trackRef.current?.scrollWidth / 2 || 0;
-
-      if (loop) {
-        if (next <= -loop) next += loop;
-        if (next >= 0) next -= loop;
-      }
-
-      x.set(next);
-      id = requestAnimationFrame(tick);
-    };
-
-    id = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(id);
-  }, [dir, x]);
-
   return (
     <section
       id="skills"
-      ref={sectionRef}
-      className="h-1/2 w-full pb-8 flex flex-col items-center justify-center relative bg-black text-white overflow-hidden"
+      style={{ background: "#F4EFE6", borderTop: "3px solid #0B0B0C" }}
+      className="py-8 md:py-12 lg:py-16"
+      aria-label="Tech stack catalogue"
     >
-      <div className="absolute inset-0 pointer-events-none">
-        <div
-          className="absolute top-1/4 left-0 w-[300px] h-[300px] rounded-full bg-gradient-to-r from-[#302b63] via-[#00bf8f] to-[#1cd8d2]
-opacity-20 blur-[120px] animate-pulse"
-        />
-        <div
-          className="absolute bottom-1/4 right-0 w-[300px] h-[300px] rounded-full bg-gradient-to-r from-[#302b63] via-[#00bf8f] to-[#1cd8d2]
-opacity-20 blur-[120px] animate-pulse delay-500"
-        />
+      {/* ── Section Header ─────────────────────────────────────── */}
+      <div style={{ borderBottom: "3px solid #0B0B0C" }} className="pb-4 mb-8">
+        <div className="global-container flex items-center gap-4">
+          <span className="font-mono text-ink text-[10px] tracking-widest uppercase opacity-50">
+            SECTION 03
+          </span>
+          <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#FF4B26" }} />
+          <h2 className="font-display text-ink text-2xl sm:text-3xl uppercase tracking-wider">
+            CATALOGUE — TECH STACK
+          </h2>
+        </div>
       </div>
 
-      <motion.h2
-        className="text-4xl mt-5 sm:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#1cd8d2] via-[#00bf8f] to-[#302b63] z-10"
-        initial={{ opacity: 0, y: -30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.1 }}
-      >
-        My Skills
-      </motion.h2>
-
-      <motion.p
-        className="mt-2 mb-8 text-white/90 text-base sm:text-lg z-10"
-        initial={{ opacity: 0, y: -10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.1 }}
-      >
-        Modern Applications | Modern Technologies | Motion Graphics 
-      </motion.p>
-
-      <div className="relative w-full overflow-hidden">
-        <motion.div
-          ref={trackRef}
-          className="flex gap-10 text-6xl text-[#1cd8d2]"
-          style={{ x, whiteSpace: "nowrap", willChange: "transform" }}
-        >
-          {repeated.map((s, i) => (
+      {/* ── Skills Grid ────────────────────────────────────────── */}
+      <div className="global-container">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {SKILL_GROUPS.map((group, idx) => (
             <div
-              key={i}
-              className="flex flex-col items-center gap-2 min-w-[120px]"
-              aria-label={s.name}
-              title={s.name}
+              key={group.category}
+              style={{
+                border: "3px solid #0B0B0C",
+                background: "#F4EFE6",
+              }}
+              className="p-6 flex flex-col gap-4 shadow-[4px_4px_0px_0px_#0B0B0C] transition-transform hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_#0B0B0C]"
+              role="listitem"
+              aria-label={group.category}
             >
-              <span className="hover:scale-125 transition-transform duration-300">
-                {s.icon}
-              </span>
-              <p className="text-sm">{s.name}</p>
+              <h3
+                className="font-display text-lg tracking-wider uppercase border-b-2 border-ink pb-2"
+                style={{
+                  color: idx % 3 === 0 ? "#FF4B26" : idx % 3 === 1 ? "#1E3FE0" : "#0B0B0C",
+                }}
+              >
+                {group.category}
+              </h3>
+              <ul className="flex flex-col gap-2 font-mono text-[11px] sm:text-xs uppercase text-ink">
+                {group.skills.map((skill) => (
+                  <li key={skill} className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 bg-ink flex-shrink-0" />
+                    <span>{skill}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

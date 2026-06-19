@@ -1,119 +1,100 @@
-// src/components/Footer.jsx
-import React from "react";
-import { motion } from "framer-motion";
-import {
-  FaYoutube,
-  FaXTwitter,
-  FaLinkedinIn,
-  FaInstagram,
-  FaGithub,
-} from "react-icons/fa6";
+import { FaXTwitter, FaLinkedinIn, FaInstagram, FaGithub } from "react-icons/fa6";
 
-/**
- * Social media links configuration
- * - Each object represents a platform
- * - Replace `href` with your own profile links
- * - Add/remove items if you want more or fewer social platforms
- */
-const socials = [
-  //{ Icon: FaYoutube, label: "YouTube", href: "https://www.youtube.com/@gauravbitss" },
-  { Icon: FaXTwitter, label: "X", href: "https://x.com/kushal21175731" },
-  { Icon: FaLinkedinIn, label: "LinkedIn", href: "https://www.linkedin.com/in/kaushal-kumar-1a0370377/" },
-  { Icon: FaInstagram, label: "Instagram", href: "https://www.instagram.com/_mystryslayer_/" },
-  { Icon: FaGithub, label: "GitHub", href: "https://github.com/kaushalkr585-cmd" },
+const SOCIAL_LINKS = [
+  { label: "GITHUB", Icon: FaGithub, href: "https://github.com/kaushalkr585-cmd" },
+  { label: "INSTAGRAM", Icon: FaInstagram, href: "https://www.instagram.com/_mystryslayer_/" },
+  { label: "LINKEDIN", Icon: FaLinkedinIn, href: "https://www.linkedin.com/in/kaushal-kumar-1a0370377/" },
+  { label: "X", Icon: FaXTwitter, href: "https://x.com/kushal21175731" },
 ];
 
-/**
- * Framer Motion variants for hover/tap glow effects
- * - Initial: normal state
- * - Hover: scale up, lift slightly, and glow with neon shadows
- * - Tap: slightly shrink when clicked/tapped
- */
-const glowVariants = {
-  initial: { scale: 1, y: 0, filter: "drop-shadow(0 0 0 rgba(0,0,0,0))" },
-  hover: {
-    scale: 1.2,
-    y: -3,
-    filter:
-      "drop-shadow(0 0 8px rgba(13,88,204,0.9)) drop-shadow(0 0 18px rgba(16,185,129,0.8))",
-    transition: { type: "spring", stiffness: 300, damping: 15 },
-  },
-  tap: { scale: 0.95, y: 0, transition: { duration: 0.08 } },
+const LINK_STYLE = {
+  fontFamily: "'JetBrains Mono', monospace",
+  fontSize: "0.65rem",
+  letterSpacing: "0.12em",
+  textTransform: "uppercase",
+  color: "rgba(244,239,230,0.5)",
+  textDecoration: "none",
+  display: "inline-flex",
+  alignItems: "center",
+  gap: "0.4rem",
+  transition: "color 120ms linear",
 };
 
-const Footer = () => {
+export default function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-black">
-      {/* --- Background neon gradient effects --- */}
-      {/* Blue glow overlay (top-right side) */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(55%_60%_at_70%_35%,rgba(13,88,204,0.35),transparent_70%)]" />
-      {/* Green glow overlay (bottom-left side) */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(50%_55%_at_30%_70%,rgba(16,185,129,0.30),transparent_70%)]" />
-
-      {/* --- Main Footer Content --- */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }} // Start faded & lowered
-        whileInView={{ opacity: 1, y: 0 }} // Animate when scrolled into view
-        transition={{ duration: 0.8 }}
-        className="relative z-10 px-4 sm:px-6 md:px-8 lg:px-10 py-16 md:py-20 flex flex-col items-center text-center space-y-6"
+    <footer style={{ background: "#0B0B0C", borderTop: "3px solid rgba(244,239,230,0.15)" }} aria-label="Footer">
+      {/* ── Big name display ─────────────────────────────────── */}
+      <div
+        style={{
+          borderBottom: "3px solid rgba(244,239,230,0.15)",
+        }}
+        className="py-8 md:py-12"
       >
-        {/* --- Personal Name / Branding --- */}
-        {/* Change text to your name or brand */}
-        <div className="w-full">
-          <h1
-            className="font-bangers font-semibold leading-none text-white text-center select-none"
+        <div className="global-container">
+          <h2
+            className="font-display text-paper"
             style={{
-              fontSize: "clamp(3rem, 5vw, 14rem)", // Responsive scaling
-              letterSpacing: "0.02em",
+              fontSize: "clamp(3rem, 9vw, 10rem)",
               lineHeight: 0.9,
-              paddingLeft: "3vw",
-              paddingRight: "3vw",
+              textTransform: "uppercase",
+              letterSpacing: "0.01em",
               whiteSpace: "nowrap",
-              textShadow: "0 2px 18px rgba(0,0,0,0.45)",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
             }}
+            aria-label="Kaushal Kumar"
           >
-            Kaushal Kumar
-          </h1>
+            KAUSHAL KUMAR
+          </h2>
+          {/* Orange rule */}
+          <div style={{ width: "6rem", height: 3, background: "#FF4B26", marginTop: "1rem" }} />
         </div>
+      </div>
 
-        {/* --- Accent underline --- */}
-        {/* Decorative gradient line under name */}
-        <div className="h-[3px] w-24 md:w-32 rounded-full bg-gradient-to-r from-[#0D58CC] via-cyan-300 to-emerald-400" />
+      {/* ── Bottom utility row ───────────────────────────────── */}
+      <div className="py-6">
+        <div
+          className="global-container"
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "1.5rem",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          {/* Social links */}
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "1.5rem", alignItems: "center" }}>
+            {SOCIAL_LINKS.map(({ label, Icon, href }, i) => (
+              <span key={label} style={{ display: "inline-flex", alignItems: "center", gap: "1.5rem" }}>
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  style={LINK_STYLE}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "#FF4B26")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(244,239,230,0.5)")}
+                >
+                  <Icon size={12} />
+                  {label}
+                </a>
+                {i < SOCIAL_LINKS.length - 1 && (
+                  <span style={{ color: "rgba(244,239,230,0.2)", fontSize: "0.6rem", userSelect: "none" }} aria-hidden="true">·</span>
+                )}
+              </span>
+            ))}
+          </div>
 
-        {/* --- Social Media Links --- */}
-        {/* Icons mapped dynamically from `socials` array */}
-        <div className="flex gap-5 text-2xl md:text-3xl">
-          {socials.map(({ Icon, label, href }) => (
-            <motion.a
-              key={label}
-              href={href}
-              aria-label={label} // Accessible label
-              target="_blank"
-              rel="noopener noreferrer"
-              variants={glowVariants}
-              initial="initial"
-              whileHover="hover"
-              whileTap="tap"
-              className="text-gray-300 transition-colors duration-200"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Icon /> {/* Icon for each social */}
-            </motion.a>
-          ))}
+          {/* Copyright */}
+          <p
+            className="font-mono text-paper"
+            style={{ fontSize: "0.6rem", letterSpacing: "0.1em", textTransform: "uppercase", opacity: 0.3 }}
+          >
+            © {new Date().getFullYear()} Kaushal Kumar. All rights reserved.
+          </p>
         </div>
-
-        {/* --- Copyright / Trademark --- */}
-        {/* Auto-updates year dynamically */}
-        <p className="text-xs text-gray-400">
-          © {new Date().getFullYear()} Kaushal Kumar. All rights reserved.
-        </p>
-      </motion.div>
+      </div>
     </footer>
   );
-};
-
-export default Footer;
+}

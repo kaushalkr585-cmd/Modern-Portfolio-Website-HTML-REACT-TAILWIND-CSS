@@ -1,184 +1,211 @@
-import React from "react";
-import { motion, useScroll, AnimatePresence } from "framer-motion";
+import img4 from "../assets/img4.png"; // Thumblify
+import img2 from "../assets/img2.png"; // Chatbot
+import img3 from "../assets/img3.png"; // Clothsy
+import ProjectMedia from "../components/ProjectMedia";
 
-// Importing project images (desktop & mobile versions)
-import img2 from "../assets/img2.png";
-import img3 from "../assets/img3.png";
-import img4 from "../assets/img4.png";
-import photo2 from "../assets/photo2.PNG";
-import photo3 from "../assets/photo3.png";
-import photo4 from "../assets/photo4.png";
-
-const MH3 = motion.h3;
-
-// 🔹 Custom Hook: Detects if screen size matches "mobile"
-const useIsMobile = (query = "(max-width: 639px)") => {
-  const [isMobile, setIsMobile] = React.useState(
-    typeof window !== "undefined" && window.matchMedia(query).matches
-  );
-
-  React.useEffect(() => {
-    if (typeof window === "undefined") return;
-    const mql = window.matchMedia(query);
-    const handler = (e) => setIsMobile(e.matches);
-
-    mql.addEventListener?.("change", handler) || mql.addListener(handler);
-
-    setIsMobile(mql.matches);
-    return () =>
-      mql.removeEventListener?.("change", handler) || mql.removeListener(handler);
-  }, [query]);
-
-  return isMobile;
-};
+const PROJECTS = [
+  {
+    code: "BSD-01",
+    title: "THUMBLIFY",
+    description:
+      "A thumbnail generation tool that lets creators design eye-catching YouTube thumbnails fast. Built with React and deployed on Vercel.",
+    tags: ["React", "Vercel", "JavaScript", "CSS"],
+    liveUrl: "https://thumblify-lake-xi.vercel.app/",
+    codeUrl: "https://github.com/kaushalkr585-cmd",
+    deployed: true,
+    image: img4,
+    accentBg: "#FF4B26",
+    accentText: "#0B0B0C",
+    cardBg: "#0B0B0C",
+    textColor: "#F4EFE6",
+    tagBorder: "rgba(244,239,230,0.3)",
+  },
+  {
+    code: "BSD-02",
+    title: "CHATBOT",
+    description:
+      "An AI-powered chatbot interface with a clean conversational UI. Built with React, integrated with an LLM API, deployed on Vercel.",
+    tags: ["React", "API", "JavaScript", "Tailwind CSS"],
+    liveUrl: "https://chatbot-tawny-five-68.vercel.app/",
+    codeUrl: "https://github.com/kaushalkr585-cmd",
+    deployed: true,
+    image: img2,
+    accentBg: "#1E3FE0",
+    accentText: "#F4EFE6",
+    cardBg: "#F4EFE6",
+    textColor: "#0B0B0C",
+    tagBorder: "rgba(11,11,12,0.3)",
+  },
+  {
+    code: "BSD-03",
+    title: "CLOTHSY",
+    description:
+      "A full-featured e-commerce web app for clothing — product listings, cart, and checkout flow. Built with React, HTML, CSS, and JS.",
+    tags: ["React", "HTML", "CSS", "JavaScript", "E-Commerce"],
+    liveUrl: "https://ecommerce-website-html-css-js-react.vercel.app/",
+    codeUrl: "https://github.com/kaushalkr585-cmd",
+    deployed: true,
+    image: img3,
+    accentBg: "#0B0B0C",
+    accentText: "#F4EFE6",
+    cardBg: "#FF4B26",
+    textColor: "#0B0B0C",
+    tagBorder: "rgba(11,11,12,0.3)",
+  },
+];
 
 export default function Projects() {
-  const isMobile = useIsMobile();
-
-  const projects = React.useMemo(
-    () => [
-      {
-        title: "Thumblify",
-        link: "https://thumblify-lake-xi.vercel.app/",
-        bgColor: "#cf0053",
-        image: isMobile ? photo4 : img4,
-      },
-      {
-        title: "Chatbot",
-        link: "https://chatbot-tawny-five-68.vercel.app/",
-        bgColor: "#221934",
-        image: isMobile ? photo2 : img2,
-      },
-      {
-        title: "Clothsy",
-        link: "https://ecommerce-website-html-css-js-react.vercel.app/",
-        bgColor: "#000000",
-        image: isMobile ? photo3 : img3,
-      },
-      
-
-    ],
-    [isMobile]
-  );
-
-  const sceneRef = React.useRef(null);
-
-  const { scrollYProgress } = useScroll({
-    target: sceneRef,
-    offset: ["start start", "end end"],
-  });
-
-  const thresholds = projects.map((_, i) => (i + 1) / projects.length);
-  const [activeIndex, setActiveIndex] = React.useState(0);
-
-  React.useEffect(() => {
-    const unsubscribe = scrollYProgress.onChange((v) => {
-      const idx = thresholds.findIndex((t) => v <= t);
-      setActiveIndex(idx === -1 ? thresholds.length - 1 : idx);
-    });
-
-    return () => unsubscribe();
-  }, [scrollYProgress, thresholds]);
-
-  const activeProject = projects[activeIndex];
-
   return (
     <section
       id="web-development-projects"
-      ref={sceneRef}
-      className="relative text-white"
-      style={{
-        height: `${100 * projects.length}vh`,
-        backgroundColor: activeProject.bgColor,
-        transition: "background-color 400ms ease",
-      }}
+      className="py-8 md:py-12 lg:py-16"
+      style={{ background: "#F4EFE6", borderTop: "3px solid #0B0B0C" }}
+      aria-label="Web development projects"
     >
-      <div className="sticky top-0 h-screen flex flex-col items-center justify-center">
-        <h2
-          className={`text-3xl font-semibold z-10 text-center ${
-            isMobile ? "mt-4" : "mt-8"
-          }`}
-        >
-          Web Development Projects
-        </h2>
+      {/* ── Section Header ─────────────────────────────────────── */}
+      <div style={{ borderBottom: "3px solid #0B0B0C" }} className="pb-4 mb-8">
+        <div className="global-container flex items-center gap-4">
+          <span className="font-mono text-ink text-[10px] tracking-widest uppercase opacity-50">
+            SECTION 04
+          </span>
+          <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#FF4B26" }} />
+          <h2 className="font-display text-ink text-2xl sm:text-3xl uppercase tracking-wider">
+            WORK — PROJECTS
+          </h2>
+        </div>
+      </div>
 
-        <div
-          className={`relative w-full flex-1 flex items-center justify-center ${
-            isMobile ? "-mt-4" : ""
-          }`}
-        >
-          {projects.map((project, idx) => (
+      {/* ── Projects List ───────────────────────────────────────── */}
+      <div className="global-container flex flex-col gap-12">
+        {PROJECTS.map((project) => (
+          <article
+            key={project.code}
+            style={{
+              background: project.cardBg,
+              color: project.textColor,
+              border: "3px solid #0B0B0C",
+            }}
+            className="shadow-[6px_6px_0px_0px_#0B0B0C]"
+            aria-label={`Project: ${project.title}`}
+          >
+            {/* Color-bar Header */}
             <div
-              key={project.title}
-              className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-500 ${
-                activeIndex === idx ? "opacity-100 z-20" : "opacity-0 z-0 sm:z-10"
-              }`}
-              style={{ width: "85%", maxWidth: "1200px" }}
+              style={{
+                background: project.accentBg,
+                color: project.accentText,
+                borderBottom: "3px solid #0B0B0C",
+                padding: "0.75rem 1.5rem",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
             >
-              <AnimatePresence mode="wait">
-                {activeIndex === idx && (
-                  <MH3
-                    key={project.title}
-                    initial={{ opacity: 0, y: -30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 30 }}
-                    transition={{ duration: 0.5, ease: "easeOut" }}
-                    className={`block text-center text-[clamp(2rem,6vw,5rem)] text-white/95 sm:absolute sm:-top-21 sm:left-[35%] lg:left-[-5%] sm:mb-0 font-bangers italic font-semibold ${
-                      isMobile ? "-mt-25" : ""
-                    }`}
+              <h3 className="font-display text-base sm:text-xl uppercase tracking-wider">
+                {project.code} — {project.title}
+              </h3>
+              {project.deployed && (
+                <span className="badge-live text-[9px] sm:text-xs">DEPLOYED ✓</span>
+              )}
+            </div>
+
+            {/* Content Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[45%_55%]">
+              {/* Left Column: Project Info */}
+              <div className="order-2 md:order-1 p-6 sm:p-8 flex flex-col gap-4 justify-center">
+                <p className="font-body text-sm sm:text-base leading-relaxed opacity-90 max-w-[50ch]">
+                  {project.description}
+                </p>
+
+                {/* Tech Tags */}
+                <div className="flex flex-wrap gap-2">
+                  {project.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      style={{
+                        border: `1.5px solid ${project.tagBorder}`,
+                        color: project.textColor,
+                      }}
+                      className="font-mono text-[9px] uppercase px-2 py-0.5"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Action Links */}
+                <div className="flex gap-4 mt-2">
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    id={`${project.code.toLowerCase()}-live`}
                     style={{
-                      zIndex: 5,
-                      textAlign: isMobile ? "center" : "left",
+                      fontFamily: "'JetBrains Mono', monospace",
+                      fontSize: "0.7rem",
+                      fontWeight: 700,
+                      textTransform: "uppercase",
+                      padding: "8px 16px",
+                      background: "#FF4B26",
+                      color: "#0B0B0C",
+                      border: "3px solid #FF4B26",
+                      textDecoration: "none",
+                      display: "inline-block",
+                      transition: "background 120ms linear, color 120ms linear",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = "#0B0B0C";
+                      e.currentTarget.style.color = "#FF4B26";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = "#FF4B26";
+                      e.currentTarget.style.color = "#0B0B0C";
                     }}
                   >
-                    {project.title}
-                  </MH3>
-                )}
-              </AnimatePresence>
+                    VIEW LIVE →
+                  </a>
+                  <a
+                    href={project.codeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    id={`${project.code.toLowerCase()}-code`}
+                    style={{
+                      fontFamily: "'JetBrains Mono', monospace",
+                      fontSize: "0.7rem",
+                      fontWeight: 700,
+                      textTransform: "uppercase",
+                      padding: "8px 16px",
+                      background: "transparent",
+                      color: project.textColor,
+                      border: `3px solid ${project.textColor}`,
+                      textDecoration: "none",
+                      display: "inline-block",
+                      transition: "background 120ms linear, color 120ms linear",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = project.textColor;
+                      e.currentTarget.style.color = project.cardBg;
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = "transparent";
+                      e.currentTarget.style.color = project.textColor;
+                    }}
+                  >
+                    VIEW CODE →
+                  </a>
+                </div>
+              </div>
 
-              <div
-                className={`relative w-full overflow-hidden bg-black/20 shadow-2xl md:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.7)] ${
-                  isMobile ? "mb-6 rounded-lg" : "mb-10 sm:mb-12 rounded-xl"
-                } h-[62vh] sm:h-[66vh]`}
-                style={{ zIndex: 10, transition: "box-shadow 250ms ease" }}
-              >
-                <img
+              {/* Right Column: Media Preview */}
+              <div className="order-1 md:order-2">
+                <ProjectMedia
                   src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover drop-shadow-xl md:drop-shadow-2xl"
-                  style={{
-                    position: "relative",
-                    zIndex: 10,
-                    filter: "drop-shadow(0 16px 40px rgba(0,0,0,0.65))",
-                    transition: "filter 200ms ease",
-                  }}
-                  loading="lazy"
-                />
-
-                <div
-                  className="pointer-events-none absolute inset-0"
-                  style={{
-                    zIndex: 11,
-                    background:
-                      "linear-gradient(180deg, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0) 40%)",
-                  }}
+                  type="image"
+                  alt={`${project.title} Preview`}
                 />
               </div>
             </div>
-          ))}
-        </div>
-
-        <div className={`absolute ${isMobile ? "bottom-20" : "bottom-10"}`}>
-          <a
-            href={activeProject?.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block px-6 py-3 font-semibold rounded-lg bg-white text-black hover:bg-gray-200 transition-all"
-            aria-label={`View ${activeProject?.title}`}
-          >
-            View Project
-          </a>
-        </div>
+          </article>
+        ))}
       </div>
     </section>
   );
