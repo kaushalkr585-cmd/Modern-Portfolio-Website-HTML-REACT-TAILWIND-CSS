@@ -4,8 +4,8 @@ const LOGO_PROJECTS = [
   {
     code: "LA-01",
     title: "APPLE PARTICLE ANIMATION",
-    description: "Particle-based logo reveal animation for Apple, built in After Effects.",
-    tags: ["After Effects", "Motion Graphics", "Logo Animation"],
+    description: "Particle-based reveal animation for Apple, built in After Effects.",
+    tags: ["After Effects", "Motion Graphics", "Animation"],
     video: "/ParticleAnimation.mp4",
     accentBg: "#FF4B26",
     accentText: "#0B0B0C",
@@ -55,7 +55,7 @@ export default function Logo() {
           </span>
           <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#FF4B26" }} />
           <h2 className="font-display text-paper text-2xl sm:text-3xl uppercase tracking-wider">
-            LOGO ANIMATIONS
+           ANIMATIONS
           </h2>
         </div>
       </div>

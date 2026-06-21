@@ -32,7 +32,7 @@ export default function Home() {
           <div className="flex flex-col justify-center">
             {/* Eyebrow */}
             <p className="font-mono text-orange text-[10px] tracking-widest uppercase mb-3">
-              FULL STACK DEVELOPER · FRESHER 2026
+              FULL STACK DEVELOPER 
             </p>
 
             {/* Giant Stacked Headline */}

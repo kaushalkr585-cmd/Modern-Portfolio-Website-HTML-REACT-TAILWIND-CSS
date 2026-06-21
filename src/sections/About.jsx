@@ -23,7 +23,7 @@ export default function About() {
         {/* Top: Biography (Text-only layout) */}
         <div className="border-b-3 border-ink pb-10 mb-10 text-ink">
           <p className="font-mono text-orange text-[10px] tracking-widest uppercase mb-2">
-            EST. 2024
+            EST. 2025
           </p>
           <h3 className="font-display text-2xl sm:text-3xl uppercase mb-3">
             Kaushal Kumar — Full Stack Developer

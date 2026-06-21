@@ -159,8 +159,8 @@ export default function Contact() {
                 >
                   <option value="" disabled style={{ background: "#0B0B0C" }}>Select a service</option>
                   <option value="Web Development" style={{ background: "#0B0B0C" }}>Web Development</option>
-                  <option value="Logo Animation" style={{ background: "#0B0B0C" }}>Logo Animation</option>
-                  <option value="Music Edit" style={{ background: "#0B0B0C" }}>Music Edit</option>
+                  <option value="Animation" style={{ background: "#0B0B0C" }}>Animation</option>
+                  <option value="Music Edit" style={{ background: "#0B0B0C" }}>Edit</option>
                   <option value="Others" style={{ background: "#0B0B0C" }}>Others</option>
                 </select>
               </Field>

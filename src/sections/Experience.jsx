@@ -12,7 +12,7 @@ const EXPERIENCES = [
     code: "EX-02",
     role: "Database & SQL",
     company: "Learning + Practice",
-    duration: "2025 (TILL JUNE)",
+    duration: "2025",
     description:
       "Strengthened database fundamentals including SQL queries, normalization, and relational database concepts, with hands-on practice on real-world style datasets.",
     active: false,
