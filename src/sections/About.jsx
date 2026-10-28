@@ -23,20 +23,24 @@ export default function About() {
         {/* Top: Biography (Text-only layout) */}
         <div className="border-b-3 border-ink pb-10 mb-10 text-ink">
           <p className="font-mono text-orange text-[10px] tracking-widest uppercase mb-2">
-            EST. 2025
+            DEVELOPER SINCE 2023
           </p>
           <h3 className="font-display text-2xl sm:text-3xl uppercase mb-3">
-            Kaushal Kumar — Full Stack Developer
+            Web Development, Video Editing & Motion Graphics Services
           </h3>
           <p className="font-body text-base leading-relaxed max-w-[80ch] mb-4">
-            I am a Full Stack Developer passionate about building fast, reliable web
-            applications with clean code and strong performance. I specialize in the MERN
-            Stack, and I also work as a Motion Graphics Designer and Video Editor using After
-            Effects and Premiere Pro.
+            I'm a Full Stack Developer specializing in the MERN stack (MongoDB, Express.js,
+            React, Node.js) with hands-on experience in AI/ML integration, database design,
+            and cloud-native deployment. Currently pursuing B.Tech in Computer Science at
+            NIST University (CGPA: 8.5, graduating 2026).
           </p>
           <p className="font-body text-sm leading-relaxed max-w-[80ch] text-ink/75">
-            I love turning ideas into scalable, user-friendly products that make an impact.
-            Always looking to push boundaries and build clean, intentional interfaces.
+            I build production-grade web applications with clean architecture, responsive
+            design, and performance-first engineering. My work spans from full-stack
+            e-commerce platforms and AI-powered chatbots to real-time thumbnail generation
+            tools — all deployed and serving real users. Beyond code, I create motion graphics 
+            and video content using After Effects and Premiere Pro, giving me a unique edge 
+            in building visually compelling digital products.
           </p>
         </div>
 

@@ -159,7 +159,7 @@ export default function Navbar() {
               whiteSpace: "nowrap",
             }}
           >
-            KAUSHAL KUMAR
+            CREATIVE PORTFOLIO
           </span>
 
           {/* Mobile hamburger */}
@@ -276,7 +276,7 @@ export default function Navbar() {
                 textTransform: "uppercase",
               }}
             >
-              KAUSHAL KUMAR
+              CREATIVE PORTFOLIO
             </span>
           </div>
         </div>

@@ -9,8 +9,8 @@ const SOCIALS = [
 ];
 
 const STATS = [
-  { value: "3", label: "MAJOR PROJECTS" },
-  { value: "MERN", label: "CORE STACK" },
+  { value: "10+", label: "PROJECTS" },
+  { value: "FULL STACK", label: "SPECIALTY" },
   { value: "2026", label: "GRAD YEAR" },
 ];
 
@@ -32,27 +32,30 @@ export default function Home() {
           <div className="flex flex-col justify-center">
             {/* Eyebrow */}
             <p className="font-mono text-orange text-[10px] tracking-widest uppercase mb-3">
-              FULL STACK DEVELOPER 
+              WEB DEVELOPMENT · VIDEO EDITING · MOTION GRAPHICS
             </p>
 
-            {/* Giant Stacked Headline */}
-            <h1
+            {/* Hidden H1 for SEO */}
+            <h1 className="sr-only">
+              Web Development, Video Editing & Motion Graphics Services by Kaushal Kumar
+            </h1>
+
+            {/* Display Headline */}
+            <p
               className="font-display text-paper leading-[0.85] tracking-tight uppercase"
               style={{
                 fontSize: "clamp(3.5rem, 8vw, 7.5rem)",
                 marginBottom: "1rem",
               }}
+              aria-hidden="true"
             >
-              BUILD.
-              <br />
-              SHIP.
-              <br />
-              <span className="text-orange">REPEAT.</span>
-            </h1>
+              KAUSHAL<br />
+              <span className="text-orange">KUMAR.</span>
+            </p>
 
             {/* Sub-name / Role */}
             <p className="font-mono text-paper/50 text-[10px] sm:text-xs tracking-wider uppercase mb-2">
-              KAUSHAL KUMAR — FULL STACK / MERN DEVELOPER
+              EXPERT WEB DEVELOPMENT · VIDEO EDITING · MOTION GRAPHICS SERVICES
             </p>
 
             {/* Paragraph Bio */}
@@ -63,8 +66,9 @@ export default function Home() {
                 maxWidth: "46ch",
               }}
             >
-              I turn complex ideas into seamless, high-impact web experiences —
-              building modern, scalable, and lightning-fast applications that make a difference.
+              Creative Professional offering expert Web Development, Video Editing, 
+              and Motion Graphics Services. I build modern, scalable web experiences 
+              and craft stunning visual content that delivers measurable business impact.
             </p>
 
             {/* CTA buttons */}
